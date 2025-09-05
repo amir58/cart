@@ -1,10 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import '../providers/cart_provider.dart';
-import '../models/cart_item.dart';
-import '../../orders/providers/orders_provider.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../../core/constants/app_constants.dart';
+import '../../orders/providers/orders_provider.dart';
+import '../models/cart_item.dart';
+import '../providers/cart_provider.dart';
 
 class CartScreen extends ConsumerWidget {
   const CartScreen({super.key});
@@ -102,11 +104,7 @@ class EmptyCartView extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           ElevatedButton.icon(
-            onPressed: () =>
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  AppConstants.homeRoute,
-                  (route) => false,
-                ),
+            onPressed: () => context.go(AppConstants.homeRoute),
             icon: const Icon(Icons.shopping_bag),
             label: const Text('Start Shopping'),
             style: ElevatedButton.styleFrom(
@@ -441,10 +439,7 @@ class CartSummary extends ConsumerWidget {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    AppConstants.homeRoute,
-                    (route) => false,
-                  );
+                  context.go(AppConstants.homeRoute);
                 },
                 child: const Text('OK'),
               ),

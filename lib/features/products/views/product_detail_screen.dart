@@ -1,10 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import '../repositories/products_repository.dart';
-import '../models/product.dart';
-import '../../cart/providers/cart_provider.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../../core/constants/app_constants.dart';
+import '../../cart/providers/cart_provider.dart';
+import '../models/product.dart';
+import '../repositories/products_repository.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   final String productId;
@@ -100,9 +102,7 @@ class _ProductDetailScreenState
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () => Navigator.of(
-              context,
-            ).pushNamed(AppConstants.cartRoute),
+            onPressed: () => context.go(AppConstants.cartRoute),
           ),
         ],
       ),
@@ -303,6 +303,6 @@ class _ProductDetailScreenState
 
   void _buyNow() {
     ref.read(cartProvider.notifier).addToCart(product!);
-    Navigator.of(context).pushNamed(AppConstants.cartRoute);
+    context.go(AppConstants.cartRoute);
   }
 }

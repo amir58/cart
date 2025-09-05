@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import '../providers/orders_provider.dart';
-import '../models/order.dart';
+
 import '../../../core/constants/app_constants.dart';
+import '../models/order.dart';
+import '../providers/orders_provider.dart';
 
 class OrderHistoryScreen extends ConsumerWidget {
   const OrderHistoryScreen({super.key});
@@ -97,11 +99,7 @@ class EmptyOrdersView extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           ElevatedButton.icon(
-            onPressed: () =>
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  AppConstants.homeRoute,
-                  (route) => false,
-                ),
+            onPressed: () => context.go(AppConstants.homeRoute),
             icon: const Icon(Icons.shopping_bag),
             label: const Text('Start Shopping'),
             style: ElevatedButton.styleFrom(
