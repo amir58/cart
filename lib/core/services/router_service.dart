@@ -1,9 +1,11 @@
 import 'package:cart/cake/build_your_cake_screen.dart';
+import 'package:cart/cake/cubit/build_your_cake_cubit.dart';
 import 'package:cart/html_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/auth/providers/auth_provider.dart';
+// import '../../features/auth/providers/auth_provider.dart';
 import '../../features/auth/views/sign_in_screen.dart';
 import '../../features/auth/views/sign_up_screen.dart';
 import '../../features/cart/views/cart_screen.dart';
@@ -13,7 +15,7 @@ import '../../features/products/views/product_list_screen.dart';
 import '../constants/app_constants.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authStateProvider);
+  // final authState = ref.watch(authStateProvider);
 
   return GoRouter(
     initialLocation: '/build-your-cake',
@@ -40,7 +42,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/build-your-cake',
         name: 'build-your-cake',
-        builder: (context, state) => const BuildYourCakeScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => BuildYourCakeCubit(),
+          child: const BuildYourCakeScreen(),
+        ),
       ),
       GoRoute(
         path: '/html',

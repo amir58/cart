@@ -1,4 +1,5 @@
 import 'package:cart/cake/cubit/build_your_cake_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Map<String, String> images = {
@@ -17,11 +18,28 @@ String color = '';
 class BuildYourCakeCubit extends Cubit<BuildYourCakeState> {
   BuildYourCakeCubit() : super(BuildYourCakeInitialState());
 
+  final List<Map<String, dynamic>> features = [
+    {'title': 'الشكل', 'icon': Icons.cake},
+    {'title': 'النكهة', 'icon': Icons.icecream},
+    {'title': 'اللون', 'icon': Icons.color_lens},
+  ];
+
+  int step = 0;
+
   String shapeId = '';
   String flavorId = '';
 
   void changeFeature(int index) {
+    step = index;
     emit(BuildYourCakeChangeFeatureState(index: index));
+  }
+
+  void nextStep() {
+    if (step == features.length - 1) {
+      return;
+    }
+    step++;
+    emit(BuildYourCakeChangeFeatureState(index: step));
   }
 
   void refreshCakeImage() {
