@@ -26,52 +26,55 @@ class _BuildYourCakeScreenState extends State<BuildYourCakeScreen> {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Column(
-          spacing: 10,
           children: [
             CakeImage(),
+            Container(height: 10, color: Colors.white),
             Expanded(
               flex: 4,
-              child: Row(
-                children: [
-                  Features(),
-                  Expanded(
-                    flex: 4,
-                    child: Column(
-                      children: [
-                        Content(),
-                        SafeArea(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                            ),
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                context
-                                    .read<BuildYourCakeCubit>()
-                                    .nextStep();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFF1E6091),
+              child: Container(
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    Features(),
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        children: [
+                          Content(),
+                          SafeArea(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20,
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Text(
-                                  'التالي',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w900,
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  context
+                                      .read<BuildYourCakeCubit>()
+                                      .nextStep();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xFF1E6091),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(
+                                    'التالي',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w900,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

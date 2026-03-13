@@ -11,12 +11,10 @@ Map<String, String> images = {
   'heart-pistachio': 'https://i.ibb.co/Tq2P2mvb/IMG-5771.jpg',
 };
 
-String shape = 'circle';
-String flavor = '';
-String color = '';
-
 class BuildYourCakeCubit extends Cubit<BuildYourCakeState> {
-  BuildYourCakeCubit() : super(BuildYourCakeInitialState());
+  BuildYourCakeCubit() : super(BuildYourCakeInitialState()) {
+    imageUrl = images['circle'] ?? '';
+  }
 
   final List<Map<String, dynamic>> features = [
     {'title': 'الشكل', 'icon': Icons.cake},
@@ -28,6 +26,10 @@ class BuildYourCakeCubit extends Cubit<BuildYourCakeState> {
 
   String shapeId = '';
   String flavorId = '';
+  Color? cakeColor;
+
+  String imageId = '';
+  String imageUrl = '';
 
   void changeFeature(int index) {
     step = index;
@@ -43,7 +45,7 @@ class BuildYourCakeCubit extends Cubit<BuildYourCakeState> {
   }
 
   void refreshCakeImage() {
-    String imageId = '';
+    imageId = '';
 
     if (shapeId != '') {
       imageId = shapeId;
@@ -56,7 +58,9 @@ class BuildYourCakeCubit extends Cubit<BuildYourCakeState> {
     print(images[imageId]);
     print(images['heart-pistachio']);
 
-    emit(BuildYourCakeImageState(image: images[imageId] ?? ''));
+    imageUrl = images[imageId] ?? '';
+
+    emit(BuildYourCakeImageState(imageUrl: imageUrl));
   }
 
   void changeShape(String id) {
@@ -67,5 +71,19 @@ class BuildYourCakeCubit extends Cubit<BuildYourCakeState> {
   void changeFlavor(String id) {
     flavorId = id;
     refreshCakeImage();
+  }
+
+  void changeColor(Color color) {
+    if (color == Colors.transparent) {
+      cakeColor = null;
+      emit(BuildYourCakeChangeColorState(color: null));
+      return;
+    }
+
+    flavorId = '';
+    refreshCakeImage();
+
+    cakeColor = color;
+    emit(BuildYourCakeChangeColorState(color: color));
   }
 }
