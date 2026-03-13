@@ -20,27 +20,37 @@ class _ColorsPageState extends State<ColorsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = [
+      Colors.transparent,
+      Colors.red,
+      Colors.blue,
+      Colors.green,
+      Colors.yellow,
+      Colors.purple,
+      Colors.orange,
+      Colors.brown,
+      Colors.pink,
+      Colors.grey,
+      Colors.black,
+      Colors.white,
+      Colors.blueGrey,
+      Colors.deepPurple,
+      Colors.deepOrange,
+      Colors.deepPurpleAccent,
+      Colors.deepOrangeAccent,
+    ];
+
     return Container(
       child: GridView.builder(
         padding: EdgeInsets.all(16),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+          crossAxisCount: 4,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
           childAspectRatio: 1,
         ),
-        itemCount: 7,
+        itemCount: colors.length,
         itemBuilder: (context, index) {
-          final colors = [
-            Colors.transparent,
-            Colors.red,
-            Colors.blue,
-            Colors.green,
-            Colors.yellow,
-            Colors.purple,
-            Colors.orange,
-          ];
-
           return GestureDetector(
             onTap: () {
               cubit.changeColor(colors[index]);
