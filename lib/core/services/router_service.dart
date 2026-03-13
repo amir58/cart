@@ -1,38 +1,52 @@
-import 'package:go_router/go_router.dart';
+import 'package:cart/cake/build_your_cake_screen.dart';
+import 'package:cart/html_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../features/auth/providers/auth_provider.dart';
 import '../../features/auth/views/sign_in_screen.dart';
 import '../../features/auth/views/sign_up_screen.dart';
-import '../../features/products/views/product_list_screen.dart';
-import '../../features/products/views/product_detail_screen.dart';
 import '../../features/cart/views/cart_screen.dart';
 import '../../features/orders/views/order_history_screen.dart';
+import '../../features/products/views/product_detail_screen.dart';
+import '../../features/products/views/product_list_screen.dart';
 import '../constants/app_constants.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);
 
   return GoRouter(
-    initialLocation: authState.user != null
-        ? AppConstants.homeRoute
-        : AppConstants.loginRoute,
-    redirect: (context, state) {
-      final isLoggedIn = authState.user != null;
-      final isLoggingIn =
-          state.matchedLocation == AppConstants.loginRoute ||
-          state.matchedLocation == AppConstants.signupRoute;
+    initialLocation: '/build-your-cake',
+    // initialLocation: authState.user != null
+    //     ? '/html'
+    //     : AppConstants.loginRoute,
+    // redirect: (context, state) {
+    //   final isLoggedIn = authState.user != null;
+    //   final isLoggingIn =
+    //       state.matchedLocation == AppConstants.loginRoute ||
+    //       state.matchedLocation == AppConstants.signupRoute;
 
-      if (!isLoggedIn && !isLoggingIn) {
-        return AppConstants.loginRoute;
-      }
+    //   if (!isLoggedIn && !isLoggingIn) {
+    //     return AppConstants.loginRoute;
+    //   }
 
-      if (isLoggedIn && isLoggingIn) {
-        return AppConstants.homeRoute;
-      }
+    //   if (isLoggedIn && isLoggingIn) {
+    //     return AppConstants.homeRoute;
+    //   }
 
-      return null;
-    },
+    //   return null;
+    // },
     routes: [
+      GoRoute(
+        path: '/build-your-cake',
+        name: 'build-your-cake',
+        builder: (context, state) => const BuildYourCakeScreen(),
+      ),
+      GoRoute(
+        path: '/html',
+        name: 'html',
+        builder: (context, state) => const HtmlPage(),
+      ),
       GoRoute(
         path: AppConstants.loginRoute,
         name: 'login',

@@ -16,10 +16,13 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'E-Commerce App',
+      locale: Locale('ar'),
+      
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         useMaterial3: true,
+
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 0,
